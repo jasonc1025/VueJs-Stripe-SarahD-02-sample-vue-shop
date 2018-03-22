@@ -73,6 +73,14 @@ export default {
       stripeEmail: ''
     };
   },
+
+// [jwc] 
+// *** IMPORTANT: Though the 'sample-stripe-handler' repo has been attached to MS-Azure:VueJs-ShopStripe-SandrasD,
+// * unfortunately,  'MS-Azure:stripe-handler:index.js' fails to be connected to ('Error 401 Unauthorization').
+// * Yet, index.js from 'MS-Azure:HttpTriggerJS1:index.js' succeeds.  
+// * Maybe because only the first Function as a Service (FAAS) is active?
+// *** Yet, the 'sample-stripe-handler' repo provides the 'node_modules' needed for 'MS-Azure:HttpTriggerJS1:index.js' to work finally. AHG.
+// 
   methods: {
     pay() {
       createToken().then(data => {
@@ -80,11 +88,15 @@ export default {
         console.log(data.token); //this is a token we would use for the stripeToken below
         axios
           .post(
-            // [jqx]+1 'https://sdras-stripe.azurewebsites.net/api/charge?code=zWwbn6LLqMxuyvwbWpTFXdRxFd7a27KCRCEseL7zEqbM9ijAgj1c1w==',
-            // N stripe-handler: 'https://vuejs-shopstripe-sandrasd.azurewebsites.net/api/charge?code=5NDcNr2MSHcMfwRWclXCqqRDWbffFreurLF9Aaw1b8qCy6iqd7yoIQ==',
-            // 'https://sdras-stripe.azurewebsites.net/api/charge?code=zWwbn6LLqMxuyvwbWpTFXdRxFd7a27KCRCEseL7zEqbM9ijAgj1c1w==',
-            // httptriggerjs1
+            // [jwc]+1 Y 'https://sdras-stripe.azurewebsites.net/api/charge?code=zWwbn6LLqMxuyvwbWpTFXdRxFd7a27KCRCEseL7zEqbM9ijAgj1c1w==',
+            
+            // N 'MS-Azure:stripe-handler:index.js': 'https://vuejs-shopstripe-sandrasd.azurewebsites.net/api/charge?code=5NDcNr2MSHcMfwRWclXCqqRDWbffFreurLF9Aaw1b8qCy6iqd7yoIQ==',
+            
+            // Y 'MS-Azure:HttpTriggerJS1:index.js'
+            // 'https://vuejs-shopstripe-sandrasd.azurewebsites.net/api/charge?code=aZ/xDaaWTFjAACCvKYb6UVWQh3b6JHTq3hm7O76Dpf7x/f9PyPWQhg==',
+            
             'https://vuejs-shopstripe-sandrasd.azurewebsites.net/api/charge?code=aZ/xDaaWTFjAACCvKYb6UVWQh3b6JHTq3hm7O76Dpf7x/f9PyPWQhg==',
+            
             {
               stripeEmail: this.stripeEmail,
               stripeToken: 'tok_visa', //testing token
