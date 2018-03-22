@@ -2,6 +2,11 @@
   <div>
     <transition name="fade">
 
+      <!--[jwc] orig: stripe='pk_test_5ThYi0UvX3xwoNdgxxxTxxrG' -->
+      <!-- NOTE: Must be Publishable-Key, not Secret-Key  -->
+      <!-- stripe='pk_test_FOQCuDIEGLnvRRWEHAmdxUAa' -->
+
+
       <div v-if="!submitted" class="payment">
         <h3>Please enter your payment details:</h3>
         <label for="email">Email</label>
@@ -11,7 +16,7 @@
         <card class='stripe-card'
           id="card"
           :class='{ complete }'
-          stripe='pk_test_5ThYi0UvX3xwoNdgxxxTxxrG'
+          stripe='pk_test_FOQCuDIEGLnvRRWEHAmdxUAa'
           :options='stripeOptions'
           @change='complete = $event.complete'
         />
@@ -75,7 +80,11 @@ export default {
         console.log(data.token); //this is a token we would use for the stripeToken below
         axios
           .post(
-            'https://sdras-stripe.azurewebsites.net/api/charge?code=zWwbn6LLqMxuyvwbWpTFXdRxFd7a27KCRCEseL7zEqbM9ijAgj1c1w==',
+            // [jqx]+1 'https://sdras-stripe.azurewebsites.net/api/charge?code=zWwbn6LLqMxuyvwbWpTFXdRxFd7a27KCRCEseL7zEqbM9ijAgj1c1w==',
+            // N stripe-handler: 'https://vuejs-shopstripe-sandrasd.azurewebsites.net/api/charge?code=5NDcNr2MSHcMfwRWclXCqqRDWbffFreurLF9Aaw1b8qCy6iqd7yoIQ==',
+            // 'https://sdras-stripe.azurewebsites.net/api/charge?code=zWwbn6LLqMxuyvwbWpTFXdRxFd7a27KCRCEseL7zEqbM9ijAgj1c1w==',
+            // httptriggerjs1
+            'https://vuejs-shopstripe-sandrasd.azurewebsites.net/api/charge?code=aZ/xDaaWTFjAACCvKYb6UVWQh3b6JHTq3hm7O76Dpf7x/f9PyPWQhg==',
             {
               stripeEmail: this.stripeEmail,
               stripeToken: 'tok_visa', //testing token
