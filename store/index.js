@@ -9,7 +9,9 @@ const createStore = () => {
       products: [
         {
           name: 'Khaki Suede Polish Work Boots',
-          price: 149.99,
+          // [jwc] orig: price: 149.99,
+          // [jwc]+1 following fix not matter, 'stripe' still responds with a 'invalid integer error'
+          price: 150,
           category: 'women',
           sale: true,
           article: 'shoe',
