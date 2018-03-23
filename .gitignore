@@ -76,7 +76,7 @@ jspm_packages
 .cache
 
 # Dist folder
-dist
+#[jwc] not ignore, for deploy on linux server: dist
 
 # Dist example generation
 examples/**/dist
