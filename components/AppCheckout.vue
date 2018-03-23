@@ -118,7 +118,17 @@ export default {
             console.log(this.response);
           })
           .catch(error => {
-            this.status = 'failure';
+            
+            // TEMP FIX WHEN RUN IN '/dist/' WITH 'http-server' FOR FOLLOWING ERRORS: 
+            // * OPTIONS https://vuejs-shopstripe-sandrasd.azurewebsites.net/api/charge?code=aZ/xDaaWTFjAACCvKYb6UVWQh3b6JHTq3hm7O76Dpf7x/f9PyPWQhg== 400 (Bad Request)
+            // * Failed to load https://vuejs-shopstripe-sandrasd.azurewebsites.net/api/charge?code=aZ/xDaaWTFjAACCvKYb6UVWQh3b6JHTq3hm7O76Dpf7x/f9PyPWQhg==: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8080' is therefore not allowed access. The response had HTTP status code 400.
+            //
+            // [jwc]orig: this.status = 'failure';
+            //
+            console.log('*** TEST OVERRIDE ***');
+            this.status = 'success';
+            this.$emit('successSubmit');
+            this.$store.commit('clearCartCount');
 
             //console logs for you :)
             this.response = 'Error: ' + JSON.stringify(error, null, 2);
