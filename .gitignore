@@ -90,3 +90,5 @@ coverage
 static/99Z-ARCHIVE/
 
 package-lock\.json
+
+dist/99Z-ARCHIVE/
